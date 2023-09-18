@@ -10,10 +10,12 @@ describe('contact form', () => {
       expect(el.attr('disabled')).to.be.undefined;
       expect(el.text()).to.eq('Send Message');
     });
+    cy.screenshot();
     cy.get('[data-cy="contact-input-email"]').type('test@example.com{enter}');
     // cy.get('[data-cy="contact-btn-submit"]')
     //   .contains('Send Message')
     //   .and('not.have.attr', 'disabled');
+    cy.screenshot();
     cy.get('[data-cy="contact-btn-submit"]').as('submitBtn');
     // cy.get('@submitBtn').click();
     cy.get('@submitBtn').contains('Sending...');
@@ -32,23 +34,23 @@ describe('contact form', () => {
     cy.get('@msgInput').focus().blur();
     cy.get('@msgInput')
       .parent()
-      .then((el) => {
-        expect(el.attr('class')).to.contains('invalid');
-      });
+      .should('have.attr', 'class')
+      .and('match', /invalid/);
 
     cy.get('[data-cy="contact-input-name"]').as('nameInput');
     cy.get('@nameInput').focus().blur();
     cy.get('@nameInput')
       .parent()
-      .then((el) => {
-        expect(el.attr('class')).to.contains('invalid');
-      });
+      .should('have.attr', 'class')
+      .and('match', /invalid/);
+
     cy.get('[data-cy="contact-input-email"]').as('emailInput');
     cy.get('@emailInput').focus().blur();
     cy.get('@emailInput')
       .parent()
-      .then((el) => {
-        expect(el.attr('class')).to.contains('invalid');
+      .should((el) => {
+        expect(el.attr('class')).not.to.be.undefined;
+        expect(el.attr('class')).contains('invalid');
       });
   });
 });

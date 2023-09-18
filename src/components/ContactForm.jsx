@@ -93,7 +93,10 @@ function ContactForm() {
     <>
       <h2 className="center">Contact Us</h2>
       <form className={classes.form} onSubmit={submitHandler}>
-        <p className={messageIsInvalid ? classes.invalid : undefined}>
+        <p
+          data-cy=""
+          className={messageIsInvalid ? classes.invalid : undefined}
+        >
           <label htmlFor="message">Your Message</label>
           <textarea
             id="message"
