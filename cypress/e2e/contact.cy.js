@@ -1,8 +1,10 @@
 /// <reference types="Cypress" />
 
 describe('contact form', () => {
+  beforeEach(() => {
+    cy.visit('/about');
+  });
   it('should submit the form', () => {
-    cy.visit('http://localhost:5173/about');
     cy.get('[data-cy="contact-input-message"]').type('Hello world!');
     cy.get('[data-cy="contact-input-name"]').type('John Doe');
 
